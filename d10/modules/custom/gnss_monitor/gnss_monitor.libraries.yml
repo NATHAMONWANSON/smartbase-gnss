@@ -1,0 +1,21 @@
+dashboard:
+  version: 1.5
+  css:
+    component:
+      css/style.css: {}
+      https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css: { type: external }
+  js:
+    # เปลี่ยนมาใช้ cdnjs (Cloudflare) เพื่อแก้ปัญหา Error 429 Too Many Requests
+    https://cdnjs.cloudflare.com/ajax/libs/highcharts/11.4.0/highcharts.min.js: { type: external, minified: true }
+    https://cdnjs.cloudflare.com/ajax/libs/highcharts/11.4.0/modules/exporting.min.js: { type: external, minified: true }
+    https://cdnjs.cloudflare.com/ajax/libs/highcharts/11.4.0/modules/boost.min.js: { type: external, minified: true }
+    
+    # Flatpickr (ใช้ตัวเดิมได้)
+    https://cdn.jsdelivr.net/npm/flatpickr: { type: external, minified: true }
+    
+    # ไฟล์หลักของเรา
+    js/monitor.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - core/once

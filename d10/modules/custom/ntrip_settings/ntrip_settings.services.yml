@@ -1,0 +1,3 @@
+services:
+  ntrip_settings.sync:
+    class: Drupal\ntrip_settings\Service\NtripSyncService

@@ -1,0 +1,5 @@
+name: 'NTRIP User Manager'
+type: module
+description: 'Provides a web interface to manage NTRIP Caster users and groups.'
+core_version_requirement: ^10
+package: 'Custom'

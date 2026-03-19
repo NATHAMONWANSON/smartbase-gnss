@@ -1,0 +1,7 @@
+ntrip_manager.config_form:
+  path: '/admin/config/ntrip_caster/config-form'
+  defaults:
+    _form: '\Drupal\ntrip_manager\Form\NtripManagerForm'
+    _title: 'Mountpoint Management'
+  requirements:
+    _permission: 'access administration pages' # กำหนดสิทธิ์เบื้องต้น

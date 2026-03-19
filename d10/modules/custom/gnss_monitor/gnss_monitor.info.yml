@@ -1,0 +1,7 @@
+name: 'GNSS Professional Monitor'
+type: module
+description: 'Advanced dashboard for S4C and ROTI monitoring with historical data.'
+package: Custom
+core_version_requirement: ^10
+dependencies:
+  - drupal:block

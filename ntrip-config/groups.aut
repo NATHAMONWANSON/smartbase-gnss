@@ -1,0 +1,9 @@
+# Group authentication file.
+# Syntax: <GROUP>:<USER1>,<USER2>
+
+adming:admin
+hellog:nice
+operg:operator
+testg:rover_test1
+userg1:nongvoon,nongnile
+

@@ -1,0 +1,15 @@
+# File: rtk_display.libraries.yml
+mqtt-client:
+  version: 5.x
+  js:
+    https://unpkg.com/mqtt@5.x/dist/mqtt.min.js: { type: external, minified: true }
+
+rtk-subscriber:
+  js:
+    js/rtk-subscriber.js: {}
+  css: # <-- บรรทัดที่ 1 ที่ต้องเพิ่ม/แก้ไข
+    theme: # <-- บรรทัดที่ 2 ที่ต้องเพิ่ม/แก้ไข
+      css/rtk-display.css: {} # <-- บรรทัดที่ 3 ที่ต้องเพิ่ม/แก้ไข
+  dependencies:
+    - core/drupal
+    - rtk_display/mqtt-client # คำสั่งสำคัญ: บอกว่าต้องโหลด mqtt-client ให้เสร็จก่อนไฟล์ของเรา

@@ -1,0 +1,15 @@
+#rtk-data-wrapper {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  background: #ffffff;
+  margin-top: 20px;
+  max-width: 500px;
+}
+
+#rtk-data-wrapper h2 {
+  margin-top: 0;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}

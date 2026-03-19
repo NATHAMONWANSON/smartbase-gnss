@@ -1,0 +1,20 @@
+ntrip_config_editor.admin_link:
+  title: 'NTRIP Caster Access Report'
+  description: 'Edit the NTRIP Caster Access Report file.'
+  parent: system.admin_config_system
+  route_name: ntrip_config_editor.form
+  weight: 100
+ntrip_config_editor.settings_form:
+  title: 'NTRIP Caster Settings'
+  description: 'Configure default rates for NTRIP billing.'
+  parent: system.admin_config_system
+  route_name: ntrip_config_editor.settings_form
+  weight: 100
+ntrip_config_editor.my_bill_menu_link:
+  title: 'My NTRIP Bill'
+  description: 'View your monthly NTRIP usage bill.'
+  route_name: ntrip_config_editor.my_bill
+  route_parameters: { user: 'current' }
+  parent: 'account'
+  menu_name: 'account'
+  weight: 0

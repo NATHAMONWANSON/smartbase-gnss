@@ -1,0 +1,11 @@
+# Ignore files and vendor folder
+d10/sites/default/files/
+d10/vendor/
+d10/sites/default/settings.local.php
+
+# Ignore ntrip log files but keep the folder
+ntrip-logs/*
+!ntrip-logs/.gitkeep
+
+# Ignore OS files
+.DS_Store

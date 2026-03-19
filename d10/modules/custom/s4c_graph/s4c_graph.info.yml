@@ -1,0 +1,5 @@
+name: 'S4C Graph Block'
+type: module
+description: 'แสดงผลกราฟ S4C แบบเรียลไทม์ (เวอร์ชันใหม่)'
+core_version_requirement: ^9 || ^10
+package: Custom

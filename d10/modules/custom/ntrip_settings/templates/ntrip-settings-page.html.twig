@@ -1,0 +1,168 @@
+{{ attach_library('ntrip_settings/ntrip_styles') }}
+
+<div class="max-w-5xl mx-auto p-6">
+  <header class="mb-8 flex items-center justify-between">
+    <div>
+      <h1 class="text-3xl md:text-4xl font-semibold text-k-dark flex items-center gap-3">
+        <i class="fas fa-satellite-dish text-k-orange text-2xl"></i>
+        <span>Welcome, <span id="username-display" class="text-k-orange">{{ display_name|default(username) }}</span>!</span>
+      </h1>
+      <p class="mt-1 text-sm text-gray-600">NTRIP connection and account overview</p>
+    </div>
+    <div class="hidden md:flex items-center gap-4">
+      <span class="px-3 py-2 rounded-md bg-k-orange text-white text-sm shadow-sm">KMITL Theme</span>
+    </div>
+  </header>
+
+  <main class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <section class="card soft-shadow rounded-lg p-6 border border-gray-100">
+      <div class="flex items-center gap-3 mb-4">
+        <i class="fas fa-server text-k-orange text-xl"></i>
+        <h2 class="text-lg font-medium">Connection Settings</h2>
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="flex items-center justify-between text-sm text-gray-600 mb-2">
+            <span class="flex items-center gap-2"><i class="fas fa-network-wired text-gray-400"></i> Caster IP</span>
+          </label>
+          <div class="flex items-center gap-2">
+            <input id="ip-value" class="flex-1 py-2 px-3 rounded-md bg-gray-50 text-sm text-gray-900 font-mono font-bold border border-gray-200" value="{{ ip_address }}" type="text" readonly />
+            <button data-target="ip-value" class="copy-btn inline-flex items-center gap-2 px-4 py-2 bg-k-orange text-white text-sm font-medium rounded-md hover:bg-[#ff8a2a] transition whitespace-nowrap">
+              <i class="fas fa-copy"></i><span>Copy</span>
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <label class="flex items-center justify-between text-sm text-gray-600 mb-2">
+            <span class="flex items-center gap-2"><i class="fas fa-plug text-gray-400"></i> Port</span>
+          </label>
+          <div class="flex items-center gap-2">
+            <input id="port-value" class="flex-1 py-2 px-3 rounded-md bg-gray-50 text-sm text-gray-900 font-mono font-bold border border-gray-200" value="{{ port }}" type="text" readonly />
+            <button data-target="port-value" class="copy-btn inline-flex items-center gap-2 px-4 py-2 bg-k-orange text-white text-sm font-medium rounded-md hover:bg-[#ff8a2a] transition whitespace-nowrap">
+              <i class="fas fa-copy"></i><span>Copy</span>
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <label class="flex items-center justify-between text-sm text-gray-600 mb-2">
+            <span class="flex items-center gap-2"><i class="fas fa-map-pin text-gray-400"></i> Mountpoint</span>
+          </label>
+          <div class="flex items-center gap-2">
+            <div id="mountpoint-value" class="flex-1 py-2 px-3 rounded-md bg-gray-50 text-sm text-gray-900 font-mono font-bold border border-gray-200">{{ mountpoint }}</div>
+            <button data-target="mountpoint-value" class="copy-btn inline-flex items-center gap-2 px-4 py-2 bg-k-orange text-white text-sm font-medium rounded-md hover:bg-[#ff8a2a] transition whitespace-nowrap">
+              <i class="fas fa-copy"></i><span>Copy</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card soft-shadow rounded-lg p-6 border border-gray-100">
+      <div class="flex items-center gap-3 mb-4">
+        <i class="fas fa-user-lock text-k-orange text-xl"></i>
+        <h2 class="text-lg font-medium">Account Details</h2>
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="text-sm text-gray-600 mb-2 flex items-center gap-2">
+            <i class="fas fa-user text-gray-400"></i> Username
+          </label>
+          <div class="flex items-center gap-3">
+            <div id="acct-username" class="flex-1 py-2 px-3 rounded-md bg-gray-50 text-sm text-k-dark font-mono">{{ username }}</div>
+            <button data-target="acct-username" class="copy-btn inline-flex items-center gap-2 px-3 py-1.5 bg-k-orange text-white text-xs rounded-md hover:bg-[#ff8a2a]">
+              <i class="fas fa-copy"></i><span>Copy</span>
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <label class="text-sm text-gray-600 mb-2 flex items-center gap-2">
+            <i class="fas fa-key text-gray-400"></i> Password
+          </label>
+          <div class="flex items-center gap-3">
+            <input id="acct-password" class="flex-1 py-2 px-3 rounded-md bg-gray-50 text-sm font-mono" value="{{ password }}" type="password" readonly />
+            <button id="toggle-pass" class="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-gray-200 text-sm rounded-md hover:bg-gray-50">
+              <i id="toggle-icon" class="fas fa-eye text-gray-600"></i>
+            </button>
+            <button data-target="acct-password" class="copy-btn inline-flex items-center gap-2 px-3 py-1.5 bg-k-orange text-white text-xs rounded-md hover:bg-[#ff8a2a]">
+              <i class="fas fa-copy"></i><span>Copy</span>
+            </button>
+          </div>
+        </div>
+
+        <p class="text-xs text-gray-500 mt-2">Keep your credentials safe. Use copy buttons to quickly paste into your NTRIP client.</p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+  (function () {
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-target');
+        if (!targetId) return;
+        const el = document.getElementById(targetId);
+        if (!el) return;
+        const text = (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') ? el.value : el.textContent.trim();
+
+        function setCopiedState(button) {
+          const old = button.innerHTML;
+          button.innerHTML = '<i class="fas fa-check"></i><span>Copied</span>';
+          setTimeout(() => button.innerHTML = old, 1200);
+        }
+
+        function fallbackCopy(txt) {
+          const ta = document.createElement('textarea');
+          ta.value = txt;
+          ta.style.position = 'fixed';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          try {
+            const ok = document.execCommand('copy');
+            document.body.removeChild(ta);
+            return ok;
+          } catch (e) {
+            document.body.removeChild(ta);
+            return false;
+          }
+        }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => {
+            setCopiedState(btn);
+          }).catch(() => {
+            if (fallbackCopy(text)) setCopiedState(btn);
+            else alert('Copy failed — please copy manually.');
+          });
+        } else {
+          if (fallbackCopy(text)) setCopiedState(btn);
+          else alert('Copy failed — please copy manually.');
+        }
+      });
+    });
+
+    const toggleBtn = document.getElementById('toggle-pass');
+    if (toggleBtn) {
+      const passInput = document.getElementById('acct-password');
+      const toggleIcon = document.getElementById('toggle-icon');
+      toggleBtn.addEventListener('click', () => {
+        if (passInput.type === 'password') {
+          passInput.type = 'text';
+          toggleIcon.classList.remove('fa-eye');
+          toggleIcon.classList.add('fa-eye-slash');
+        } else {
+          passInput.type = 'password';
+          toggleIcon.classList.remove('fa-eye-slash');
+          toggleIcon.classList.add('fa-eye');
+        }
+      });
+    }
+  })();
+</script>
+

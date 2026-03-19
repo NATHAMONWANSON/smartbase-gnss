@@ -1,0 +1,9 @@
+ntrip_user_manager.config_form:
+  path: '/admin/config/ntrip_user_manager'
+  defaults:
+    _form: '\Drupal\ntrip_user_manager\Form\UserManagerForm'
+    _title: 'User Management'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE

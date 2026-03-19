@@ -1,0 +1,3 @@
+access own ntrip bill:
+  title: 'Access own NTRIP bill'
+  description: 'Allows users to view their own NTRIP usage bill.'

@@ -1,0 +1,10 @@
+# User authentication file.
+# Syntax: <USER>:<PASSWORD>
+
+admin:admin1234
+nice:nice1234
+nongnile:nile1234
+nongvoon:voon1234
+operator:oper1234
+rover_test1:1234
+

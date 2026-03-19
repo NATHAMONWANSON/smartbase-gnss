@@ -1,0 +1,70 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for the ntrip_config_editor module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function ntrip_config_editor_schema() {
+  $schema['ntrip_invoices'] = [
+    'description' => 'Stores invoices for NTRIP Caster service usage.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique invoice ID.',
+      ],
+      'user_id' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'The Drupal user ID (uid) this invoice belongs to.',
+      ],
+      'billing_period_start' => [
+        'type' => 'datetime',
+        'not null' => TRUE,
+        'description' => 'The start date of the billing period.',
+      ],
+      'billing_period_end' => [
+        'type' => 'datetime',
+        'not null' => TRUE,
+        'description' => 'The end date of the billing period.',
+      ],
+      'total_amount' => [
+        'type' => 'numeric',
+        'size' => '10,2',
+        'not null' => TRUE,
+        'default' => 0.00,
+        'description' => 'The total calculated cost for the period.',
+      ],
+      'status' => [
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => TRUE,
+        'default' => 'unpaid',
+        'description' => 'The status of the invoice (e.g., unpaid, paid).',
+      ],
+      'created_at' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Timestamp when the invoice was created.',
+      ],
+    ],
+    'primary key' => ['id'],
+    'foreign keys' => [
+      'invoice_user' => [
+        'table' => 'users_field_data',
+        'columns' => ['user_id' => 'uid'],
+      ],
+    ],
+    'indexes' => [
+      'user_id_idx' => ['user_id'],
+    ],
+  ];
+  return $schema;
+}

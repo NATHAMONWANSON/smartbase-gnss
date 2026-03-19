@@ -1,0 +1,55 @@
+<?php
+
+use Drupal\Core\Render\Element;
+
+/**
+ * @file
+ * Primary module hooks for NTRIP Settings module.
+ */
+
+function ntrip_settings_theme($existing, $type, $theme, $path) {
+  return [
+    'ntrip_settings_page' => [
+      'template' => 'ntrip-settings-page',
+      'variables' => [
+        'mountpoint' => NULL,
+        'ip_address' => NULL,
+        'port' => NULL,
+        'username' => NULL,
+        'password' => NULL,
+        'display_name' => NULL,
+      ],
+    ],
+  ];
+}
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Component\Utility\Random;
+
+/**
+ * Implements hook_entity_presave().
+ */
+function ntrip_settings_entity_presave(EntityInterface $entity) {
+
+  if ($entity->getEntityTypeId() !== 'user') {
+    return;
+  }
+
+  // ทำเฉพาะตอนสร้างใหม่
+  if ($entity->isNew()) {
+
+    $random = new Random();
+    $ntrip_password = $random->string(8);
+
+    if ($entity->hasField('field_ntrip_password')) {
+      $entity->set('field_ntrip_password', $ntrip_password);
+    }
+
+    \Drupal::service('ntrip_settings.sync')
+      ->createUser(
+        $entity->getAccountName(),
+        $ntrip_password,
+        'default'
+      );
+  }
+}

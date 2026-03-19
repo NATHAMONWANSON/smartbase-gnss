@@ -1,0 +1,66 @@
+<?php
+
+use Drupal\Core\Url;
+
+/**
+ * @file
+ * Primary module hooks for NTRIP Config Editor module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function ntrip_config_editor_theme($existing, $type, $theme, $path) {
+  return [
+    // 1. Template สำหรับหน้าแสดงรายการบิลปกติ
+    'ntrip_bill_page' => [
+      'variables' => [
+        'title' => NULL,
+        'rows' => [],
+        'total_cost_raw' => 0.0,
+        'total_cost_formatted' => '',
+        'rate_info' => NULL,
+        'empty' => NULL,
+        'user_id' => NULL, // เพิ่มไว้สำหรับสร้างลิงก์ไปยังหน้า Summary
+      ],
+    ],
+
+    // 2. [เพิ่มใหม่] Template สำหรับหน้าใบแจ้งหนี้แบบทางการ (Invoice Preview)
+    'ntrip_invoice_template' => [
+      'variables' => [
+        'invoice_data' => NULL, // ตัวแปรหลักที่จะเก็บข้อมูลทั้งหมดสำหรับแสดงในใบเสร็จ
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_user().
+ *
+ * This hook is used to inject the "My Bill" link directly into the
+ * user profile page content.
+ */
+function ntrip_config_editor_preprocess_user(&$variables) {
+  $current_user = \Drupal::currentUser();
+  $route_match = \Drupal::routeMatch();
+  $user_being_viewed = $variables['user'];
+
+  $route_name = $route_match->getRouteName();
+
+  if ($route_name == 'entity.user.canonical' &&
+      $current_user->id() == $user_being_viewed->id() &&
+      $current_user->hasPermission('access own ntrip bill')) {
+
+    $url = Url::fromRoute('ntrip_config_editor.my_bill', ['user' => $current_user->id()]);
+
+    $variables['content']['my_ntrip_bill_link'] = [
+      '#type' => 'link',
+      '#title' => t('View My NTRIP Bill'),
+      '#url' => $url,
+      '#attributes' => [
+        'class' => ['button', 'button--primary', 'my-bill-button'],
+      ],
+      '#weight' => -100,
+    ];
+  }
+}

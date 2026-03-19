@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for S4C Graph module.
+ */
+
+/**
+ * Implements hook_page_attachments().
+ */
+function s4c_graph_page_attachments(array &$attachments) {
+  // บังคับโหลด Library 's4c_bundle' เข้าไปในทุกหน้า
+  $attachments['#attached']['library'][] = 's4c_graph/s4c_bundle';
+}

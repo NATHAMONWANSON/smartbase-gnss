@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * Implements hook_theme().
+ */
+function gnss_monitor_theme($existing, $type, $theme, $path) {
+  return [
+    'gnss_dashboard' => [
+      'variables' => [],
+      'template' => 'gnss-dashboard',
+    ],
+  ];
+}

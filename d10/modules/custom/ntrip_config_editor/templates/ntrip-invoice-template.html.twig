@@ -1,0 +1,59 @@
+<div class="invoice-box" style="max-width: 800px; margin: auto; padding: 30px; border: 1px solid #eee; font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;">
+    <table cellpadding="0" cellspacing="0" style="width: 100%; line-height: 24px; text-align: left;">
+        <tr class="top">
+            <td colspan="2" style="padding-bottom: 20px;">
+                <table style="width: 100%;">
+                    <tr>
+                        <td class="title" style="font-size: 45px; color: #333;"><strong>INVOICE</strong></td>
+                        <td style="text-align: right;">
+                            Invoice #: {{ invoice_data.invoice_no }}<br>
+                            Created: {{ invoice_data.date }}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        
+        <tr class="information">
+            <td colspan="2" style="padding-bottom: 40px;">
+                <table style="width: 100%;">
+                    <tr>
+                        <td>
+                            <strong>Bill To:</strong><br>
+                            {{ invoice_data.customer_name }}<br> {# แก้ไขตรงนี้ #}
+                            {{ invoice_data.customer_email }}<br> {# แก้ไขตรงนี้ #}
+                            NTRIP User: {{ invoice_data.ntrip_user }}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr class="heading" style="background: #eee; border-bottom: 1px solid #ddd; font-weight: bold;">
+            <td style="padding: 5px;">Description (Station)</td>
+            <td style="text-align: right; padding: 5px;">Amount (Baht)</td>
+        </tr>
+
+        {% for item in invoice_data.items %}
+        <tr class="item" style="border-bottom: 1px solid #eee;">
+            {# แก้ไขให้ตรงกับ description และ usage #}
+            <td style="padding: 5px;">{{ item.description }} ({{ item.usage }})</td> 
+            <td style="text-align: right; padding: 5px;">{{ item.amount }}</td>
+        </tr>
+        {% endfor %}
+
+        <tr class="total" style="font-weight: bold; border-top: 2px solid #eee;">
+            <td></td>
+            <td style="text-align: right; padding: 10px 5px;">
+               Subtotal: {{ invoice_data.subtotal }} Baht<br>
+               VAT (7%): {{ invoice_data.tax }} Baht<br>
+               {# แก้ไขจาก grand_total เป็น total #}
+               <span style="font-size: 20px; color: #007bff;">Total: {{ invoice_data.total }} Baht</span>
+            </td>
+        </tr>
+    </table>
+    
+    <div style="margin-top: 40px; text-align: center;">
+        <button onclick="window.print()" class="button">Print Invoice</button>
+    </div>
+</div>

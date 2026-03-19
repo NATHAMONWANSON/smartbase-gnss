@@ -1,0 +1,6 @@
+# File: rtk_display.info.yml
+name: 'RTK Real-time Display'
+type: module
+description: 'แสดงผลข้อมูล RTK จาก MQTT แบบ Real-time'
+core_version_requirement: ^10
+package: Custom

@@ -1,0 +1,10 @@
+ntrip_config_editor.settings:
+  type: config_object
+  label: 'NTRIP Config Editor Settings'
+  mapping:
+    time_rate:
+      type: float
+      label: 'Time Rate (Baht/minute)'
+    data_rate:
+      type: float
+      label: 'Data Rate (Baht/MB)'

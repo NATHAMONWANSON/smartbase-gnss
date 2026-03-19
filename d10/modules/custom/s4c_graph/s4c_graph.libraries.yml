@@ -1,0 +1,13 @@
+# ชื่อ Library ต้องชิดซ้ายสุด
+s4c_bundle:
+  version: 1.x
+  js:
+    # บรรทัดนี้ต้องเคาะ Space 4 ครั้ง
+    js/chart.min.js: {}
+    js/chartjs-adapter-date-fns.bundle.min.js: {}
+    js/chartjs-plugin-zoom.min.js: {}
+    js/s4c_graph.js: {}
+  dependencies:
+    # บรรทัดนี้ต้องเคาะ Space 4 ครั้ง
+    - core/drupal
+    - core/drupalSettings

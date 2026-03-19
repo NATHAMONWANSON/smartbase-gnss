@@ -1,0 +1,50 @@
+{# templates/ntrip-bill-page.html.twig #}
+
+<h2>{{ title }}</h2>
+
+{% if rows %}
+  {# --- [ เพิ่ม style ให้ตาราง ] --- #}
+  <table style="width: 100%; border-collapse: collapse;">
+    <thead>
+      <tr style="border-bottom: 2px solid #ddd;">
+        {# --- [ เพิ่ม style ให้หัวตาราง ] --- #}
+        <th style="padding: 10px; text-align: left;">{{ 'Station'|t }}</th>
+        <th style="padding: 10px; text-align: left;">{{ 'Total Duration'|t }}</th>
+        <th style="padding: 10px; text-align: left;">{{ 'Total Data'|t }}</th>
+        <th style="padding: 10px; text-align: left;">{{ 'Cost'|t }}</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for row in rows %}
+      <tr style="border-bottom: 1px solid #eee;">
+        {# --- [ เพิ่ม style ให้เซลล์ข้อมูล ] --- #}
+        <td style="padding: 10px;">{{ row.station }}</td>
+        <td style="padding: 10px;">{{ row.duration }}</td>
+        <td style="padding: 10px;">{{ row.bytes }}</td>
+        <td style="padding: 10px;">{{ row.cost }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+      <tr>
+        {# --- [ เพิ่ม style ให้เซลล์ Total ] --- #}
+        <td colspan="3" style="padding: 10px; text-align:right; font-weight: bold;">{{ 'Total'|t }}</td>
+        <td style="padding: 10px; font-weight: bold;">{{ total_cost_formatted }}</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  {# นี่คือส่วนของปุ่ม #}
+  {% if total_cost_raw > 0 %}
+    <div class="payment-section" style="margin-top: 25px; text-align: right;">
+      {# ใช้ path('ชื่อรูท', {พารามิเตอร์}) เพื่อสร้าง URL ที่ถูกต้องอัตโนมัติ #}
+      <a href="{{ path('ntrip_config_editor.payment_summary', {'user': user_id}) }}" class="button button--primary">
+        {{ 'Proceed to Payment'|t }}
+      </a>
+    </div>
+  {% endif %}
+  {# --- สิ้นสุดส่วนของปุ่ม --- #}
+
+{% else %}
+  <p>{{ empty }}</p>
+{% endif %}

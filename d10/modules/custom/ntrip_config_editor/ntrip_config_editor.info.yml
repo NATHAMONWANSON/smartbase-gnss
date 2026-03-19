@@ -1,0 +1,5 @@
+name: NTRIP Caster Access Report
+type: module
+description: 'Provides a web interface to edit the NTRIP Caster Access Report file.'
+package: Custom
+core_version_requirement: ^9 || ^10

@@ -1,0 +1,5 @@
+ntrip_config_editor.my_bill_tab:
+  route_name: ntrip_config_editor.my_bill
+  title: 'My NTRIP Bill'
+  base_route: entity.user.canonical
+  weight: 10

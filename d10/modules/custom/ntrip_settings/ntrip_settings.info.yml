@@ -1,0 +1,5 @@
+name: NTRIP Settings
+type: module
+description: 'Displays NTRIP settings for the currently logged-in user.'
+core_version_requirement: ^9 || ^10
+package: Custom

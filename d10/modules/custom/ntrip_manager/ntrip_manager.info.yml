@@ -1,0 +1,5 @@
+name: Ntrip Caster Manager
+type: module
+description: 'Manages Ntrip Caster mountpoints and configuration files.'
+core_version_requirement: ^9 || ^10
+package: Custom

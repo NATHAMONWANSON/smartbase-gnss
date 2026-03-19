@@ -1,0 +1,36 @@
+ntrip_config_editor.form:
+  path: '/admin/config/system/ntrip-caster-config'
+  defaults:
+    _form: '\Drupal\ntrip_config_editor\Form\NtripConfigForm'
+    _title: 'NTRIP Caster Access Report'
+  requirements:
+    _permission: 'administer site configuration'
+ntrip_config_editor.settings_form:
+  path: '/admin/config/system/ntrip-caster-settings'
+  defaults:
+    _form: '\Drupal\ntrip_config_editor\Form\NtripSettingsForm'
+    _title: 'NTRIP Caster Settings'
+  requirements:
+    _permission: 'administer site configuration'
+ntrip_config_editor.my_bill:
+  path: '/user/{user}/my-bill'
+  defaults:
+    _controller: '\Drupal\ntrip_config_editor\Controller\NtripBillController::showBill'
+    _title: 'My NTRIP Bill'
+  requirements:
+    _permission: 'access own ntrip bill'
+  options:
+    parameters:
+      user:
+        type: entity:user
+ntrip_config_editor.payment_summary:
+  path: '/user/{user}/my-bill/summary'
+  defaults:
+    _controller: '\Drupal\ntrip_config_editor\Controller\NtripBillController::paymentSummary'
+    _title: 'Invoice Preview'
+  requirements:
+    _permission: 'access content'
+  options:
+    parameters:
+      user:
+        type: 'entity:user'

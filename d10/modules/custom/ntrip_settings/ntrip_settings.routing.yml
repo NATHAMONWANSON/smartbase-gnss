@@ -1,0 +1,7 @@
+ntrip_settings.page:
+  path: '/ntrip-settings'
+  defaults:
+    _controller: '\Drupal\ntrip_settings\Controller\NtripController::showSettings'
+    _title: 'NTRIP Settings'
+  requirements:
+    _permission: 'access content'

@@ -1,0 +1,4 @@
+services:
+  ntrip_config_editor.log_parser:
+    class: Drupal\ntrip_config_editor\NtripLogParser
+    arguments: ['@messenger']

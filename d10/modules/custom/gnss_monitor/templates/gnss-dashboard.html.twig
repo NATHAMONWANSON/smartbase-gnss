@@ -1,0 +1,30 @@
+<div class="gnss-dashboard">
+  <div class="dashboard-controls">
+    <h2> GNSS Real-time Monitoring </h2>
+    
+    <div class="control-group">
+      <div class="input-wrapper">
+        <label>Historical Data:</label>
+        <input type="text" id="date-picker" placeholder="Live Mode (Auto-scroll)">
+      </div>
+      <button id="btn-reset" class="btn-secondary hidden">Back to Live</button>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div id="chart-s4c" style="height: 350px; width: 100%;"></div>
+    <div id="spinner-s4c" class="spinner">Loading S4C...</div>
+  </div>
+
+  <br>
+
+  <div class="chart-card">
+    <div id="chart-roti" style="height: 350px; width: 100%;"></div>
+    <div id="spinner-roti" class="spinner">Loading ROTI...</div>
+  </div>
+
+  <div class="satellite-toggles">
+    <button id="btn-show-all" class="btn-small">Show All Satellites</button>
+    <button id="btn-hide-all" class="btn-small">Hide All</button>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+# API endpoint for GNSS combined data (S4 and ROTI)
+s4c_graph.api_data:
+  path: '/api/gnss/combined-data'
+  defaults:
+    _controller: '\Drupal\s4c_graph\Controller\GraphApiController::getData'
+    _title: 'GNSS Combined Data API'
+  requirements:
+    _permission: 'access content'
+  options:
+    no_cache: TRUE
+
+# Page for displaying the GNSS graphs
+s4c_graph.page:
+  path: '/gnss-monitor'
+  defaults:
+    _controller: '\Drupal\s4c_graph\Controller\GraphPageController::page'
+    _title: 'GNSS Real-time Monitor'
+  requirements:
+    _permission: 'access content'

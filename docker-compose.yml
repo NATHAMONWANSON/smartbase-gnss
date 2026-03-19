@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  web:
+    build: ./docker/web
+    container_name: gnss_web
+    ports:
+      - "80:80"
+    volumes:
+      # ผูกโค้ดเว็บกลับไปที่ตำแหน่งเดิมที่ Drupal เคยอยู่
+      - ./d10:/var/www/html/d10
+      # ผูกไฟล์ config และ log ของ ntripcaster
+      - ./ntrip-config:/etc/ntripcaster
+      - ./ntrip-logs:/var/log/ntripcaster
+    restart: unless-stopped
+    depends_on:
+      - db
+      - api
+
+  api:
+    build: ./api
+    container_name: gnss_api
+    # ไม่ต้อง Map Port ออกไปข้างนอกก็ได้ เพราะเว็บจะคุยกับมันข้างใน Docker
+    # แต่ถ้าอยากเทสผ่าน Postman ให้ใส่ ports: - "5000:5000"
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+
+  db:
+    image: mariadb:10.11
+    container_name: gnss_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: drupal_db
+      MYSQL_USER: drupal_user
+      MYSQL_PASSWORD: drupal_password
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: unless-stopped
+
+volumes:
+  db_data:
